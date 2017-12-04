@@ -8,9 +8,40 @@ Date:
 # ## #
 '''
 Goals	
+	intro infomation!
 	include tax low wage cut off
 	include math for find living costs
 	include "cash on hand" vairable for finding money after living costs and tax
+	karma stat
+	homeless stat
+	city wide crime?
+	city wide "activitys"
+	buildings could include
+		dairy
+		park
+		bank
+		lawers
+		roads
+		police stations (combats crime levels and karma?)
+		truck depot
+		state houseing
+	buildings could unlock other buildings
+	infrastuctor
+	random events!
+		earthquakes
+		fires
+		sudden lack of money
+		changes of federal law requirements
+		criminal activity in town
+		state lawsuits
+	people in society demanding/requesting stuff
+		enviromentalists
+		commuters
+		anti-tax avoiders
+		sick people
+		homeless people
+	end objectives
+		prove to govenment you are stable by not dying for X days/years
 '''
 #print('\n')
 
@@ -220,7 +251,7 @@ class Society:
 			self.dashboard()
 			
 			usr_sig = input('Action> ')
-			if  usr_sig == 'n' or usr_sig == 'N':		# n = exit
+			if  usr_sig == 'n' or usr_sig == 'N':		# n = next day
 				break
 			elif usr_sig == 'x' or usr_sig == 'X':		# x = reset/exit
 				usr_reset_sig = input('Do you want to reset(r), exit(x) or continue(c)>')

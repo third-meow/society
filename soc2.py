@@ -17,8 +17,6 @@ Goals
 	city wide crime?
 	city wide "activitys"
 	buildings could include
-		dairy
-		park
 		bank
 		lawers
 		roads
@@ -55,12 +53,12 @@ FORMATGAP = 20					#FORMATGAP is used for formating output to keep numbers under
 unhealthy_chance = 10.0 		#the higher this is(out of 100) the more people will be unhealthy.
 unemployment_chance = 10.0 		#the higher this is(out of 100) the more unemployed Society will be.
 
-get_sick_chance = 1.0 		#the higher this is the more likly a person will get sick.
-get_better_chance = 1.0 	#the higher this is the more likly a sick person will get better.
-new_job_chance = 1.0 		#the higher this is the more likly a unemployed person will get a job.
-lose_job_chance = 1.0 		#the higher this is the more likly a person is to lose their job.
-pay_rise_chance = 1.0		#the higher this is the more likly a person will get a pay rise
-pay_cut_chance = 1.0		#the higher this is the more likly a person will get a pay cut
+get_sick_chance = 1.0 		#the higher this is the more likely a person will get sick.
+get_better_chance = 1.0 	#the higher this is the more likely a sick person will get better.
+new_job_chance = 1.0 		#the higher this is the more likely a unemployed person will get a job.
+lose_job_chance = 1.0 		#the higher this is the more likely a person is to lose their job.
+pay_rise_chance = 1.0		#the higher this is the more likely a person will get a pay rise
+pay_cut_chance = 1.0		#the higher this is the more likely a person will get a pay cut
 class Society:
 	def __init__(self):
 		
@@ -73,11 +71,18 @@ class Society:
 		self.avr_savings = 0		#average savings of the people in society
 		
 		self.avalible_buildings = []		#list of buildings player could build
-		self.avalible_buildings.append(['Small Hospital',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]
-		self.avalible_buildings.append(['Large Hospital',3000,2.1,+19,+20])
-		self.avalible_buildings.append(['Library',50,0,+10])
-		
+		self.avalible_buildings.append(['Clinic',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]
+		self.avalible_buildings.append(['School',100,4.1,+3,+15])
+		self.avalible_buildings.append(['Library',50,1,0,+10])
+		self.avalible_buildings.append(['Dairy',25,0.5,0,+5])
+		self.avalible_buildings.append(['Park',50,0.05,+5,+1])
+				
 		self.buildings = []			#list of built buildings
+		
+		self.employment_offset = 0
+		self.health_offset = 0
+		self.salary_offset = 0
+		
 		
 		self.income_tax = 10 		#income_tax is how much of each citizen's salary they pay for tax per year
 		self.gov_funds = 20			#the govenments savings
@@ -184,19 +189,19 @@ class Society:
 	
 		for p in self.population:
 			if p.health == True:
-				if uniform(0,100) < self.calibrated_get_sick_chance:
+				if uniform(0,100) < (self.calibrated_get_sick_chance - (self.health_offset/self.people)):
 					p.health = False
 			else:
-				if uniform(0,100) < self.calibrated_get_better_chance:
+				if uniform(0,100) < (self.calibrated_get_better_chance + (self.health_offset/self.people)):
 					p.health = True
 					
 			if p.employed == True:
-				if uniform(0,100) < self.calibrated_lose_job_chance:
+				if uniform(0,100) < (self.calibrated_lose_job_chance - (self.employment_offset/self.people)):
 					p.employed = False
 			else:
-				if uniform(0,100) < self.calibrated_new_job_chance:
+				if uniform(0,100) < (self.calibrated_new_job_chance + (self.employment_offset/self.people)):
 					p.employed = True
-					
+			
 			if p.employed == True:
 				if uniform(0,100) > pay_rise_chance:
 					p.salary = p.salary/0.95
@@ -273,6 +278,9 @@ class Society:
 				wait_for = int(input('Days>'))
 				for i in range (wait_for):
 					self.recalculate()
+			elif usr_sig == 'DEV':
+				command = input('COMMAND>')
+				exec(command)
 			else:
 				break
 	def build(self):

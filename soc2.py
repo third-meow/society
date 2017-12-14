@@ -86,6 +86,37 @@ class Society:
 		self.instructions.append('Wait (you are then prompted for number of days)')
 		self.instructions.append('\n')
 		
+		self.instructions.append('N/blank')
+		self.instructions.append((9-len('N/blank'))*' ')
+		self.instructions.append('Next day')
+		self.instructions.append('\n')
+		
+		self.instructions.append('T')
+		self.instructions.append((9-len('T'))*' ')
+		self.instructions.append('Change Tax')
+		self.instructions.append('\n')
+		
+		self.instructions.append('E')
+		self.instructions.append((9-len('E'))*' ')
+		self.instructions.append('Employ people / build stuff')
+		self.instructions.append('\n')
+		
+		self.instructions.append('DEV')
+		self.instructions.append((9-len('DEV'))*' ')
+		self.instructions.append('Allows you to enter any command directly into game')
+		self.instructions.append('\n')
+		
+		self.instructions.append('\n	')
+		self.instructions.append('self.gov_funds = X')
+		self.instructions.append((22-len('self.gov_funds = X'))*' ')
+		self.instructions.append('set govenment funds to X')
+		self.instructions.append('\n')
+		
+		self.instructions.append('	')
+		self.instructions.append('etc')
+		self.instructions.append((22-len('etc'))*' ')
+		self.instructions.append('look through sorce code for any other things you could alter')
+		self.instructions.append('\n')
 		
 		self.avalible_buildings = []		#list of buildings player could build
 		self.avalible_buildings.append(['Clinic',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]

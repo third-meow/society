@@ -70,6 +70,23 @@ class Society:
 		self.avr_salary = 0			#average salary of the people in society
 		self.avr_savings = 0		#average savings of the people in society
 		
+		self.instructions = []		#list of commands you can use
+		self.instructions.append('Command')
+		self.instructions.append((9-len('Command'))*' ')
+		self.instructions.append('Result')
+		self.instructions.append('\n')
+		
+		self.instructions.append('X')
+		self.instructions.append((9-len('X'))*' ')
+		self.instructions.append('Exit')
+		self.instructions.append('\n')		
+		
+		self.instructions.append('W')
+		self.instructions.append((9-len('W'))*' ')
+		self.instructions.append('Wait (you are then prompted for number of days)')
+		self.instructions.append('\n')
+		
+		
 		self.avalible_buildings = []		#list of buildings player could build
 		self.avalible_buildings.append(['Clinic',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]
 		self.avalible_buildings.append(['School',100,4.1,+3,+15])
@@ -107,6 +124,8 @@ class Society:
 			temp_salary = uniform(10,200)
 				
 			self.population.append(Person(temp_health,temp_employed,temp_salary))		#create instances of class "person" with random health status, employment status & random salary
+		print(''.join(self.instructions))
+		
 		self.update_stats()
 		self.days = 0				#begin gameplay with day 0
 	
@@ -248,8 +267,8 @@ class Society:
 		dash_values.append(str(floor(self.avr_savings*100)/100))
 		dash_values.append('\n')
 		
-		print("".join(dash_labels))
-		print("".join(dash_values))
+		print(''.join(dash_labels))
+		print(''.join(dash_values))
 		
 	def action(self):
 		while True:

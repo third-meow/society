@@ -118,12 +118,12 @@ class Society:
 		self.instructions.append('look through sorce code for any other things you could alter')
 		self.instructions.append('\n')
 		
-		self.avalible_buildings = []		#list of buildings player could build
-		self.avalible_buildings.append(['Clinic',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]
-		self.avalible_buildings.append(['School',100,4.1,+3,+15])
-		self.avalible_buildings.append(['Library',50,1,0,+10])
-		self.avalible_buildings.append(['Dairy',25,0.5,0,+5])
-		self.avalible_buildings.append(['Park',50,0.05,+5,+1])
+		self.available_buildings = []		#list of buildings player could build
+		self.available_buildings.append(['Clinic',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]
+		self.available_buildings.append(['School',100,4.1,+3,+15])
+		self.available_buildings.append(['Library',50,1,0,+10])
+		self.available_buildings.append(['Dairy',25,0.5,0,+5])
+		self.available_buildings.append(['Park',50,0.05,+5,+1])
 				
 		self.buildings = []			#list of built buildings
 		
@@ -333,20 +333,58 @@ class Society:
 				exec(command)
 			else:
 				break
+
 	def build(self):
 		print('Built Buildings')
-		print('Index'+(14-len('Index'))*' '+'Building'+(28-len('Building'))*' '+'Cost')
+		
+		print(								#print the column titles
+		'Index'									#index number for selcting building
+		+(14-len('Index'))*' '					#spacer
+		+'Building'								#building name
+		+(18-len('Building'))*' '				#spacer
+		+'Cost'									#cost of building
+		+(8-len('Cost'))*' '					#spacer
+		+'Cost/day'								#cost per day
+		+(18-len('Cost/day'))*' '				#spacer
+		)
 		
 		for i in range(len(self.buildings)):
-			print(str(i)+(14-len(str(i)))*' '+self.buildings[i][0]+(28-len(self.buildings[i][0]))*' '+str(self.buildings[i][1]))
+			
+			print(												#print details of available buildings
+			str(i)													#index number
+			+(14-len(str(i)))*' '									#spacer	
+			+self.available_buildings[i][0]							#building name
+			+(18-len(self.available_buildings[i][0]))*' '			#spacer
+			+str(self.available_buildings[i][1])					#cost
+			+(18-len(str(self.available_buildings[i][1])))*' '		#spacer
+			+str(self.available_buildings[i][2])					#cost per day
+			)
 		print('\n')
 		
 		
-		print('Avalible Buildings')
-		print('Index'+(14-len('Index'))*' '+'Building'+(28-len('Building'))*' '+'Cost')
+		print('Available Buildings')
+		print(								#print the column titles
+		'Index'									#index number for selcting building
+		+(14-len('Index'))*' '					#spacer
+		+'Building'								#building name
+		+(18-len('Building'))*' '				#spacer
+		+'Cost'									#cost of building
+		+(8-len('Cost'))*' '					#spacer
+		+'Cost/day'								#cost per day
+		+(18-len('Cost/day'))*' '				#spacer
+		)
 		
-		for i in range(len(self.avalible_buildings)):
-			print(str(i)+(14-len(str(i)))*' '+self.avalible_buildings[i][0]+(28-len(self.avalible_buildings[i][0]))*' '+str(self.avalible_buildings[i][1]))
+		for i in range(len(self.available_buildings)):
+			
+			print(												#print details of available buildings
+			str(i)													#index number
+			+(14-len(str(i)))*' '									#spacer	
+			+self.available_buildings[i][0]							#building name
+			+(18-len(self.available_buildings[i][0]))*' '			#spacer
+			+str(self.available_buildings[i][1])					#cost
+			+(18-len(str(self.available_buildings[i][1])))*' '		#spacer
+			+str(self.available_buildings[i][2])					#cost per day
+			)
 		print('\n')
 		
 		
@@ -354,11 +392,11 @@ class Society:
 		if usr_sig == 'b' or usr_sig == 'B':
 			
 			usr_build_sig = input('Build(index number)>')
-			if self.gov_funds > self.avalible_buildings[int(usr_build_sig)][1]:
-				self.gov_funds -= self.avalible_buildings[int(usr_build_sig)][1]
-				self.gov_costs += self.avalible_buildings[int(usr_build_sig)][2]
+			if self.gov_funds > self.available_buildings[int(usr_build_sig)][1]:
+				self.gov_funds -= self.available_buildings[int(usr_build_sig)][1]
+				self.gov_costs += self.available_buildings[int(usr_build_sig)][2]
 				
-				self.buildings.append(self.avalible_buildings[int(usr_build_sig)])
+				self.buildings.append(self.available_buildings[int(usr_build_sig)])
 			else:
 				print('Not enough funds \n')
 				time.sleep(1)

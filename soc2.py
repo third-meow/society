@@ -341,8 +341,6 @@ class Society:
 		+(14-len('Index'))*' '					#spacer
 		+'Building'								#building name
 		+(18-len('Building'))*' '				#spacer
-		+'Cost'									#cost of building
-		+(8-len('Cost'))*' '					#spacer
 		+'Cost/day'								#cost per day
 		+(18-len('Cost/day'))*' '				#spacer
 		)
@@ -354,8 +352,6 @@ class Society:
 			+(14-len(str(i)))*' '									#spacer	
 			+self.buildings[i][0]									#building name
 			+(18-len(self.buildings[i][0]))*' '						#spacer
-			+str(self.buildings[i][1])								#cost
-			+(8-len(str(self.buildings[i][1])))*' '				#spacer
 			+str(self.buildings[i][2])								#cost per day
 			)
 		print('\n')
@@ -371,6 +367,7 @@ class Society:
 		+(8-len('Cost'))*' '					#spacer
 		+'Cost/day'								#cost per day
 		+(18-len('Cost/day'))*' '				#spacer
+		+'Effect(heath/employment)'				#effect of building on health and employment
 		)
 		
 		for i in range(len(self.available_buildings)):
@@ -383,6 +380,12 @@ class Society:
 			+str(self.available_buildings[i][1])					#cost
 			+(8-len(str(self.available_buildings[i][1])))*' '		#spacer
 			+str(self.available_buildings[i][2])					#cost per day
+			+(18-len(str(self.available_buildings[i][2])))*' '		#spacer
+			+'['													#open bracket for "effects"
+			+str(self.available_buildings[i][3])					#health effect
+			+'/'													#slash to separate effects
+			+str(self.available_buildings[i][4])					#emplyment effects
+			+']'
 			)
 		print('\n')
 		

@@ -8,7 +8,6 @@ Date:
 # ## #
 '''
 Goals	
-	intro infomation!
 	include tax low wage cut off
 	include math for find living costs
 	include "cash on hand" vairable for finding money after living costs and tax
@@ -41,7 +40,7 @@ Goals
 	end objectives
 		prove to govenment you are stable by not dying for X days/years
 '''
-#print('\n')
+print('\n')
 
 import time
 from math import floor
@@ -106,7 +105,7 @@ class Society:
 		self.instructions.append('Allows you to enter any command directly into game')
 		self.instructions.append('\n')
 		
-		self.instructions.append('\n	')
+		self.instructions.append('Such as..\n	')
 		self.instructions.append('self.gov_funds = X')
 		self.instructions.append((22-len('self.gov_funds = X'))*' ')
 		self.instructions.append('set govenment funds to X')
@@ -353,11 +352,11 @@ class Society:
 			print(												#print details of available buildings
 			str(i)													#index number
 			+(14-len(str(i)))*' '									#spacer	
-			+self.available_buildings[i][0]							#building name
-			+(18-len(self.available_buildings[i][0]))*' '			#spacer
-			+str(self.available_buildings[i][1])					#cost
-			+(18-len(str(self.available_buildings[i][1])))*' '		#spacer
-			+str(self.available_buildings[i][2])					#cost per day
+			+self.buildings[i][0]									#building name
+			+(18-len(self.buildings[i][0]))*' '						#spacer
+			+str(self.buildings[i][1])								#cost
+			+(8-len(str(self.buildings[i][1])))*' '				#spacer
+			+str(self.buildings[i][2])								#cost per day
 			)
 		print('\n')
 		
@@ -382,7 +381,7 @@ class Society:
 			+self.available_buildings[i][0]							#building name
 			+(18-len(self.available_buildings[i][0]))*' '			#spacer
 			+str(self.available_buildings[i][1])					#cost
-			+(18-len(str(self.available_buildings[i][1])))*' '		#spacer
+			+(8-len(str(self.available_buildings[i][1])))*' '		#spacer
 			+str(self.available_buildings[i][2])					#cost per day
 			)
 		print('\n')

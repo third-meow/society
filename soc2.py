@@ -238,17 +238,17 @@ class Society:
 	
 		for p in self.population:
 			if p.health == True:
-				if uniform(0,100) < (self.calibrated_get_sick_chance - (self.health_offset/self.people)):
+				if uniform(0,100) < (self.calibrated_get_sick_chance + (self.health_offset/self.people)):
 					p.health = False
 			else:
-				if uniform(0,100) < (self.calibrated_get_better_chance + (self.health_offset/self.people)):
+				if uniform(0,100) < (self.calibrated_get_better_chance - (self.health_offset/self.people)):
 					p.health = True
 					
 			if p.employed == True:
-				if uniform(0,100) < (self.calibrated_lose_job_chance - (self.employment_offset/self.people)):
+				if uniform(0,100) < (self.calibrated_lose_job_chance + (self.employment_offset/self.people)):
 					p.employed = False
 			else:
-				if uniform(0,100) < (self.calibrated_new_job_chance + (self.employment_offset/self.people)):
+				if uniform(0,100) < (self.calibrated_new_job_chance - (self.employment_offset/self.people)):
 					p.employed = True
 			
 			if p.employed == True:
@@ -393,15 +393,20 @@ class Society:
 		usr_sig = input('Build(b) or exit(x)>')
 		if usr_sig == 'b' or usr_sig == 'B':
 			
-			usr_build_sig = input('Build(index number)>')
-			if self.gov_funds > self.available_buildings[int(usr_build_sig)][1]:
-				self.gov_funds -= self.available_buildings[int(usr_build_sig)][1]
-				self.gov_costs += self.available_buildings[int(usr_build_sig)][2]
+			usr_build_sig = int(input('Build(index number)>'))
+			if self.gov_funds > self.available_buildings[usr_build_sig][1]:			#if you have enough money
+				self.gov_funds -= self.available_buildings[usr_build_sig][1]				#take money from gov_funds
+				self.gov_costs += self.available_buildings[usr_build_sig][2]				#add the amount building costs per day to gov_costs
 				
-				self.buildings.append(self.available_buildings[int(usr_build_sig)])
-			else:
-				print('Not enough funds \n')
-				time.sleep(1)
+				self.health += self.available_buildings[usr_build_sig][3]
+				self.employment_offset += self.available_buildings[usr_build_sig][4]
+								
+				
+				self.buildings.append(self.available_buildings[int(usr_build_sig)])				#add building to self.buildings
+			
+			else:																			#if you dont have enough money
+				print('Not enough funds \n')													#print "not enough funds"
+				time.sleep(1)																	#wait 1 seconds
 		else:
 			pass
 		

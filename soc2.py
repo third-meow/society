@@ -46,7 +46,6 @@ import time
 from math import floor
 from random import uniform
 
-FORMATGAP = 20					#FORMATGAP is used for formating output to keep numbers under their labels
 
 #chance variables
 unhealthy_chance = 10.0 		#the higher this is(out of 100) the more people will be unhealthy.

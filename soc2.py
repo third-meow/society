@@ -118,12 +118,12 @@ class Society:
 		self.instructions.append('\n')
 		
 		self.available_buildings = []		#list of buildings player could build
-		self.available_buildings.append(['Clinic',1000,1.2,+13,+15])			#format of these inner lists is [name, cost, maintaining cost(per day), societal heath benift, societal employment benifit]
-		self.available_buildings.append(['School',100,4.1,+3,+15])
-		self.available_buildings.append(['Library',50,1,0,+10])
-		self.available_buildings.append(['Dairy',25,0.5,0,+5])
-		self.available_buildings.append(['Park',50,0.05,+5,+1])
-				
+		self.available_buildings.append({'name':'Clinic','cost':1000,'cost/day':1.2,'health impact':+13,'employment impact':+15])			#available_buildings becomes a list of dictionarys with stats about the avalible buildings
+		self.available_buildings.append({'name':'School','cost':300,'cost/day':2.1,'health impact':+2,'employment impact':+15])
+		self.available_buildings.append({'name':'Library','cost':50,'cost/day':1.0,'health impact':0,'employment impact':+10])
+		self.available_buildings.append({'name':'Park','cost':50,'cost/day':0.05,'health impact':+5,'employment impact':+1])
+		self.available_buildings.append({'name':'Dairy','cost':25,'cost/day':0.5,'health impact':0,'employment impact':+5])
+		
 		self.buildings = []			#list of built buildings
 		
 		self.employment_offset = 0
@@ -372,19 +372,19 @@ class Society:
 		
 		for i in range(len(self.available_buildings)):
 			
-			print(												#print details of available buildings
-			str(i)													#index number
-			+(14-len(str(i)))*' '									#spacer	
-			+self.available_buildings[i][0]							#building name
-			+(18-len(self.available_buildings[i][0]))*' '			#spacer
-			+str(self.available_buildings[i][1])					#cost
-			+(8-len(str(self.available_buildings[i][1])))*' '		#spacer
-			+str(self.available_buildings[i][2])					#cost per day
-			+(18-len(str(self.available_buildings[i][2])))*' '		#spacer
-			+'['													#open bracket for "effects"
-			+str(self.available_buildings[i][3])					#health effect
-			+'/'													#slash to separate effects
-			+str(self.available_buildings[i][4])					#emplyment effects
+			print(													#print details of available buildings
+			str(i)														#index number
+			+(14-len(str(i)))*' '										#spacer	
+			+self.available_buildings[i]['name']						#building name
+			+(18-len(self.available_buildings[i]['name']))*' '			#spacer
+			+str(self.available_buildings[i]['cost'])					#cost
+			+(8-len(str(self.available_buildings[i]['cost'])))*' '		#spacer
+			+str(self.available_buildings[i]['cost/day'])				#cost per day
+			+(18-len(str(self.available_buildings[i]['cost/day'])))*' '	#spacer
+			+'['														#open bracket for "effects"
+			+str(self.available_buildings[i]['health impact'])			#health effect
+			+'/'														#slash to separate effects
+			+str(self.available_buildings[i]['employment impact'])		#emplyment effects
 			+']'
 			)
 		print('\n')
@@ -394,14 +394,13 @@ class Society:
 		if usr_sig == 'b' or usr_sig == 'B':
 			
 			usr_build_sig = int(input('Build(index number)>'))
-			if self.gov_funds > self.available_buildings[usr_build_sig][1]:			#if you have enough money
-				self.gov_funds -= self.available_buildings[usr_build_sig][1]				#take money from gov_funds
-				self.gov_costs += self.available_buildings[usr_build_sig][2]				#add the amount building costs per day to gov_costs
+			if self.gov_funds > self.available_buildings[usr_build_sig]['cost']:			#if you have enough money
 				
-				self.health += self.available_buildings[usr_build_sig][3]
-				self.employment_offset += self.available_buildings[usr_build_sig][4]
-								
-				
+				self.gov_funds -= self.available_buildings[usr_build_sig]['cost']				#take money from gov_funds
+				self.gov_costs += self.available_buildings[usr_build_sig]['cost/day']				#add the amount building costs per day to gov_costs
+				self.health_offset += self.available_buildings[usr_build_sig]['health impact']				#add building's health impact to self's health_offset
+				self.employment_offset += self.available_buildings[usr_build_sig]['employment impact']			#add building's health impact to self's employment_offset
+							
 				self.buildings.append(self.available_buildings[int(usr_build_sig)])				#add building to self.buildings
 			
 			else:																			#if you dont have enough money

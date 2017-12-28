@@ -117,11 +117,11 @@ class Society:
 		self.instructions.append('\n')
 		
 		self.available_buildings = []		#list of buildings player could build
-		self.available_buildings.append({'name':'Clinic','cost':1000,'cost/day':1.2,'health impact':+13,'employment impact':+15])			#available_buildings becomes a list of dictionarys with stats about the avalible buildings
-		self.available_buildings.append({'name':'School','cost':300,'cost/day':2.1,'health impact':+2,'employment impact':+15])
-		self.available_buildings.append({'name':'Library','cost':50,'cost/day':1.0,'health impact':0,'employment impact':+10])
-		self.available_buildings.append({'name':'Park','cost':50,'cost/day':0.05,'health impact':+5,'employment impact':+1])
-		self.available_buildings.append({'name':'Dairy','cost':25,'cost/day':0.5,'health impact':0,'employment impact':+5])
+		self.available_buildings.append({'name':'Clinic','cost':1000,'cost/day':1.2,'health impact':+13,'employment impact':+15})			#available_buildings becomes a list of dictionarys with stats about the avalible buildings
+		self.available_buildings.append({'name':'School','cost':300,'cost/day':2.1,'health impact':+2,'employment impact':+15})
+		self.available_buildings.append({'name':'Library','cost':50,'cost/day':1.0,'health impact':0,'employment impact':+1})
+		self.available_buildings.append({'name':'Park','cost':50,'cost/day':0.05,'health impact':+5,'employment impact':+1})
+		self.available_buildings.append({'name':'Dairy','cost':25,'cost/day':0.5,'health impact':0,'employment impact':+5})
 		
 		self.buildings = []			#list of built buildings
 		
@@ -349,9 +349,9 @@ class Society:
 			print(												#print details of available buildings
 			str(i)													#index number
 			+(14-len(str(i)))*' '									#spacer	
-			+self.buildings[i][0]									#building name
-			+(18-len(self.buildings[i][0]))*' '						#spacer
-			+str(self.buildings[i][2])								#cost per day
+			+self.buildings[i]['name']									#building name
+			+(18-len(self.buildings[i]['name']))*' '						#spacer
+			+str(self.buildings[i]['cost/day'])								#cost per day
 			)
 		print('\n')
 		

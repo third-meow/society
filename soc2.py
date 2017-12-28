@@ -45,7 +45,7 @@ print('\n')
 import time
 from math import floor
 from random import uniform
-
+import instruct
 
 #chance variables
 unhealthy_chance = 10.0 		#the higher this is(out of 100) the more people will be unhealthy.
@@ -67,54 +67,6 @@ class Society:
 		self.employment = 0			#number of employed people is society
 		self.avr_salary = 0			#average salary of the people in society
 		self.avr_savings = 0		#average savings of the people in society
-		
-		self.instructions = []		#list of commands you can use
-		self.instructions.append('Command')
-		self.instructions.append((9-len('Command'))*' ')
-		self.instructions.append('Result')
-		self.instructions.append('\n')
-		
-		self.instructions.append('X')
-		self.instructions.append((9-len('X'))*' ')
-		self.instructions.append('Exit')
-		self.instructions.append('\n')		
-		
-		self.instructions.append('W')
-		self.instructions.append((9-len('W'))*' ')
-		self.instructions.append('Wait (you are then prompted for number of days)')
-		self.instructions.append('\n')
-		
-		self.instructions.append('N/blank')
-		self.instructions.append((9-len('N/blank'))*' ')
-		self.instructions.append('Next day')
-		self.instructions.append('\n')
-		
-		self.instructions.append('T')
-		self.instructions.append((9-len('T'))*' ')
-		self.instructions.append('Change Tax')
-		self.instructions.append('\n')
-		
-		self.instructions.append('E')
-		self.instructions.append((9-len('E'))*' ')
-		self.instructions.append('Employ people / build stuff')
-		self.instructions.append('\n')
-		
-		self.instructions.append('DEV')
-		self.instructions.append((9-len('DEV'))*' ')
-		self.instructions.append('Allows you to enter any command directly into game')
-		self.instructions.append('\n')
-		
-		self.instructions.append('Such as..\n	')
-		self.instructions.append('self.gov_funds = X')
-		self.instructions.append((22-len('self.gov_funds = X'))*' ')
-		self.instructions.append('set govenment funds to X')
-		self.instructions.append('\n')
-		
-		self.instructions.append('	')
-		self.instructions.append('etc')
-		self.instructions.append((22-len('etc'))*' ')
-		self.instructions.append('look through sorce code for any other things you could alter')
-		self.instructions.append('\n')
 		
 		self.available_buildings = []		#list of buildings player could build
 		self.available_buildings.append({'name':'Clinic','cost':1000,'cost/day':1.2,'health impact':+13,'employment impact':+15})			#available_buildings becomes a list of dictionarys with stats about the avalible buildings
@@ -153,7 +105,8 @@ class Society:
 			temp_salary = uniform(10,200)
 				
 			self.population.append(Person(temp_health,temp_employed,temp_salary))		#create instances of class "person" with random health status, employment status & random salary
-		print(''.join(self.instructions))
+		
+		print(''.join(instruct.instructions))			#print instructions from instruct.py
 		
 		self.update_stats()
 		self.days = 0				#begin gameplay with day 0
@@ -346,12 +299,12 @@ class Society:
 		
 		for i in range(len(self.buildings)):
 			
-			print(												#print details of available buildings
-			str(i)													#index number
-			+(14-len(str(i)))*' '									#spacer	
+			print(													#print details of available buildings
+			str(i)														#index number
+			+(14-len(str(i)))*' '										#spacer	
 			+self.buildings[i]['name']									#building name
-			+(18-len(self.buildings[i]['name']))*' '						#spacer
-			+str(self.buildings[i]['cost/day'])								#cost per day
+			+(18-len(self.buildings[i]['name']))*' '					#spacer
+			+str(self.buildings[i]['cost/day'])							#cost per day
 			)
 		print('\n')
 		

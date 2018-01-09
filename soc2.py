@@ -103,18 +103,24 @@ class Society:
 			else:
 				temp_employed = True
 			temp_salary = uniform(10,200)
-				
-			self.population.append(Person(temp_health,temp_employed,temp_salary))		#create instances of class "person" with random health status, employment status & random salary
+
+		    #create instances of class "person" with random health status, employment status & random salary	
+			self.population.append(Person(temp_health,temp_employed,temp_salary))
 		
 		print(''.join(instruct.instructions))			#print instructions from instruct.py
 		
 		self.update_stats()
 		self.days = 0				#begin gameplay with day 0
 	
+	
 	def reset(self):				#allows for self.rst to be "seen" outside self
 		return self.rst	
+	
+	
 	def exit(self):					#allows for self.ext to be "seen" outside self
 		return self.ext
+	
+	
 	def update_stats(self):
 		self.days+=1  			#every recalculate() is one day passing
 		if self.days == 365: 	# if 365 days have past, 1 year has past and so we:
@@ -146,8 +152,8 @@ class Society:
 		self.avr_savings = total_savings/self.people		#calculate average savings
 		self.gov_funds -= self.gov_costs					#take govement costs off govement funds
 	
+	
 	def calibrate_chances(self,debug=False):		#to be run in self.recalculate() after self.update_stats() but before if statments
-		
 		try:
 			self.calibrated_get_sick_chance = get_sick_chance/self.health
 		except ZeroDivisionError:
@@ -184,6 +190,7 @@ class Society:
 			print('newjob')
 			print(self.calibrated_new_job_chance*(self.people-self.employment))
 	
+	
 	def recalculate(self, printout=False):
 		self.update_stats()
 		self.calibrate_chances()
@@ -211,6 +218,7 @@ class Society:
 					p.salary = p.salary*0.95
 		if printout:
 			self.dashboard()
+	
 	
 	def dashboard(self):
 		dash_labels=[]
@@ -252,6 +260,7 @@ class Society:
 		print(''.join(dash_labels))
 		print(''.join(dash_values))
 		
+	
 	def action(self):
 		while True:
 			self.dashboard()
@@ -285,6 +294,7 @@ class Society:
 			else:
 				break
 
+	
 	def build(self):
 		print('Built Buildings')
 		
